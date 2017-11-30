@@ -6,13 +6,13 @@
 ////    configuration      
 ////////////////////////
 
-var debug = true;
+var debug = false;
 
 ////////////////////////
 ////    global variables      
 ////////////////////////
 
-var arrButtonID = ["#king", "#queen", "#bishop", "#knight"];
+var arrButtonID = ["#emerald", "#ruby", "#topaz", "#alexandrite"];
 var finalScore = 0;
 var computerGuess = null;
 var winner = null;
@@ -23,22 +23,25 @@ var gameComplete = false;
 ////////////////////////
 ////    functions      
 ////////////////////////
-// pseudo
-// function for generating the computer's random pick
-// Function to generate the computer's guess
 
+////////////////////////
+// set all fields to their default values
+////////////////////////
 function initializeGame() {
-    // set all fields to their default values
+
     finalScore = 0;
     computerGuess = null;
     winner = null;
     gameComplete = false;
     $("#score, #computer-pick").empty();
-    
+
 }
 
+////////////////////////
+////    Generate displayed random number      
+////////////////////////
 function generateComputerGuess() {
-    // Randomly generate a letter for the computer pick
+
     computerGuess = Math.floor((Math.random() * 120) + 19);
     // Target div to write data
     var targetDiv = $("#computer-pick");
@@ -46,10 +49,10 @@ function generateComputerGuess() {
         console.log("computerGuess generated as: " + computerGuess);
     }
     targetDiv.text(computerGuess);
-
-    // return randomNumber
 }
-// function for generating the crystal's random value
+////////////////////////
+////    calculate values of clicked crystals      
+////////////////////////
 function generateCrystalValues() {
     for (i = 0; i < arrButtonID.length; i++) {
         // at the start of the game, each crystal is given a random point value from 1 - 12
@@ -69,12 +72,12 @@ function generateCrystalValues() {
 ////////////////////////
 
 $(document).ready(function () {
-    ////////////////////////
-    ////    Generate displayed random number      
-    ////////////////////////
+
     // pseudo
-    // Initialize the game
-    if(!gameComplete){
+    ////////////////////////
+    // Initialize the game for the first run where the gameComplete variable has not yet been set
+    ////////////////////////
+    if (!gameComplete) {
         // randomly generate a displayed number as the computer's pick
         initializeGame();
         // Generate the computerGuess
@@ -86,16 +89,9 @@ $(document).ready(function () {
     }
 
     ////////////////////////
-    ////    calculate values of clicked crystals      
-    ////////////////////////
-    // pseudo
     // user clicks each crystal to determine its unknown value
-    // the value is displayed and each click of any crystal will add to the total
-
+    ////////////////////////
     $(".btn").click(function (event) {
-        // if (!gameComplete) {
-        //     $("#result").hide();
-        // }
         // Determine the value of the button that was clicked
         var btnValue = this.value;
         var btnID = this.id;
@@ -103,51 +99,52 @@ $(document).ready(function () {
             console.log("btnValue is: " + btnValue);
             console.log("btnID is: " + btnID);
         }
+        // the value is displayed and each click of any crystal will add to the finalScore
         finalScore = (parseInt(finalScore) + parseInt(btnValue));
-        if (debug) {
-            console.log("finalScore: " + finalScore);
-        }
+        console.log("finalScore: " + finalScore);
         // update the id "#score"
         $("#score").text(finalScore);
-
+        ////////////////////////
+        // Determine if the player has won
+        ////////////////////////
         if (finalScore === computerGuess && !gameComplete) {
             winner = true;
+            // update the wins counter
             winCounter++
             $("#wins").text(winCounter);
             if (debug) {
                 console.log("finalScore === computerGuess")
             }
+            // output a message to the user to show them that they won
             $("#result").text("You Win!");
             $("#result").show();
+            // Set the gameComplete to true as we have now played a round and will need to re-initialize the game to start over
             gameComplete = true;
-        } else if (finalScore > computerGuess && !gameComplete) {
+        }
+        ////////////////////////
+        // Determine if the player has lost
+        ////////////////////////
+        else if (finalScore > computerGuess && !gameComplete) {
             winner = false;
+            // update loss counter
             lossCounter++
             $("#losses").text(lossCounter);
             if (debug) {
                 console.log("finalScore > computerGuess")
             }
+            // output a message to the user that they have lost
             $("#result").text("You Lost!");
             $("#result").show();
+            // Set the gameComplete to true as we have now played a round and will need to re-initialize the game to start over
             gameComplete = true;
         }
-
+        ////////////////////////
+        ////    re-initialize the game to start fresh      
+        ////////////////////////
         if (gameComplete) {
             initializeGame();
             generateComputerGuess();
             generateCrystalValues();
-            // return;
         }
     });
-    // user clicks each crystal to add up to the randomly generated value
-
-
-    ////////////////////////
-    ////    add wins and losses      
-    ////////////////////////
-    // pseudo
-    // if the user exceeds the value if the computer's pick, then the game is over and a loss is tallyed
-    // if the user guesses the computer's pick, the user wins
-    // after either a win or a loss, the game resets and a new number is generated by the computer 
-    // the value of the crystals is regenerated as well
 });

@@ -11,27 +11,44 @@
     <!-- Adding jquery 3.2.1 reference -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-        <script src="assets/javascript/game.js"></script>
-
-
+    <script src="assets/javascript/game.js"></script>
     <title>Crystal Collector</title>
 </head>
 
 <body>
-    <!-- pseudo-code -->
     <!-- Add a header with the game title -->
     <header>
         <div class="jumbotron">
             <h1>Crystal Collector</h1>
-            <p>Add Instructions to play game...</p>
         </div>
     </header>
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Instructions:</h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Instructions to play game -->
+                        <div class="well well-lg" id="instructions">
+                            <p>The computer will automatically generate a random number. The crystal buttons below will also
+                                be assigned a random value.</p>
+                            <p>You must click the crystals to add up to the computer's number.</p>
+                            <p>To win you must match the computer's pick exactly. If you go over, you lose.</p>
+                            <p>Wins and losses will be tracked until the page refreshes. Good luck!</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Computer Pick</h3>
+                        <!-- Div to hold the computer's pick -->
+                        <h3 class="panel-title">Computer Pick:</h3>
                     </div>
                     <div class="panel-body">
                         <div class="well well-lg" id="computer-pick">0</div>
@@ -41,7 +58,8 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Computer Pick</h3>
+                        <!-- Div to track the results -->
+                        <h3 class="panel-title">Results:</h3>
                     </div>
                     <div class="panel-body">
                         <ul class="list-group">
@@ -56,45 +74,42 @@
             </div>
         </div>
         <div class="row" id="icon-row">
+            <!-- Crystal player input buttons -->
             <div class="col-md-2">
-                    <button type="button" class="btn btn-danger" aria-label="Left Align" id="king" value="0">
-                <span class="glyphicon glyphicon-king" aria-hidden="true"></span>
-                    </button>
+                <!-- My birthstone -->
+                <button type="button" class="btn" aria-label="Left Align" id="emerald" value="0">
+                </button>
             </div>
             <div class="col-md-2">
-                    <button type="button" class="btn btn-success" aria-label="Left Align" id="queen" value="0">
-                <span class="glyphicon glyphicon-queen" aria-hidden="true"></span>
+                <!-- Sonja's birthstone -->
+                <button type="button" class="btn" aria-label="Left Align" id="ruby" value="0">
             </div>
             <div class="col-md-2">
-                    <button type="button" class="btn btn-info" aria-label="Left Align" id="bishop" value="0">
-                <span class="glyphicon glyphicon-bishop" aria-hidden="true"></span>
+                <!-- Maddison's birthstone -->
+                <button type="button" class="btn" aria-label="Left Align" id="topaz" value="0">
             </div>
             <div class="col-md-2">
-                    <button type="button" class="btn btn-warning" aria-label="Left Align" id="knight" value="0">
-                <span class="glyphicon glyphicon-knight" aria-hidden="true"></span>
+                <!-- Tyler's birthstone -->
+                <button type="button" class="btn" aria-label="Left Align" id="alexandrite" value="0">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Score</h3>
+                        <h3 class="panel-title">Score:</h3>
                     </div>
                     <div class="panel-body">
-                            <div class="well well-sm" id="result"></div>
-                            <div class="well well-lg" id="score">0</div>
+                        <!-- initially hidden, this well will display the results of the last attempt -->
+                        <div class="well well-sm" id="result"></div>
+                        <!--  -->
+                        <div class="well well-lg" id="score">0</div>
                     </div>
                 </div>
 
             </div>
         </div>
-            <!-- upper left side should have instructions on how to play the game -->
-            <!-- below the instruction box is a display that shows a randomly generated number -->
-            <!-- to the right of the randomly generated number is the wins\losses counter -->
-            <!-- below the generated number is 4 boxes that have different crystal icons -->
-            <!-- the score is listed below the crystals -->
-        </div>
-
+    </div>
 </body>
 
 </html>
